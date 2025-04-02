@@ -5,13 +5,19 @@ import { marked } from "marked";
 import Toolbar from "./components/Toolbar";
 
 function App() {
-  const [text, setText] = useState("# Olá, eu sou feito de markdown");
+  const [text, setText] = useState(
+    localStorage.getItem("markdownText") || "# Olá, eu sou feito de markdown"
+  );
 
   const renderText = () => {
     return { __html: marked(text) };
   };
 
   const textAreaRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.setItem("markdownText", text);
+  }, [text]);
 
   return (
     <div className="app-container">
