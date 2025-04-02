@@ -1,14 +1,18 @@
-const Toolbar = () => {
+type Props = {
+  insertText: (before: string, after: string) => void;
+};
+
+const Toolbar = ({ insertText }: Props) => {
   return (
     <div className="toolbar">
-      <button>h1</button>
-      <button>h2</button>
-      <button>Bold</button>
-      <button>Italico</button>
-      <button>Link</button>
-      <button>Code block</button>
-      <button>List Item</button>
-      <button>Horizontal Line</button>
+      <button onClick={() => insertText("#", "")}>h1</button>
+      <button onClick={() => insertText("## ", "")}>h2</button>
+      <button onClick={() => insertText("**", "**")}>Bold</button>
+      <button onClick={() => insertText("*", "*")}>Italico</button>
+      <button onClick={() => insertText("[", "](https://)")}>Link</button>
+      <button onClick={() => insertText("```", "```")}>Code block</button>
+      <button onClick={() => insertText("- ", "")}>List Item</button>
+      <button onClick={() => insertText("\n---\n", "")}>Horizontal Line</button>
     </div>
   );
 };

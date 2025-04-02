@@ -13,15 +13,33 @@ function App() {
     return { __html: marked(text) };
   };
 
-  const textAreaRef = useRef(null);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     localStorage.setItem("markdownText", text);
   }, [text]);
 
+  const insertText = (before: string, after: string) => {
+    const textArea = textAreaRef.current;
+
+    if (!textArea) return;
+
+    const start = textArea.selectionStart;
+    const end = textArea.selectionEnd;
+    const previousText = textArea.value;
+    const beforeText = previousText.substring(0, start);
+    const selectText = previousText.substring(start, end);
+    const afterText = previousText.substring(end);
+
+    const newText = `${beforeText}${before}${selectText}${after}${afterText}`;
+
+    setText(newText);
+    textArea.focus();
+  };
+
   return (
     <div className="app-container">
-      <Toolbar></Toolbar>
+      <Toolbar insertText={insertText}></Toolbar>
       <textarea
         ref={textAreaRef}
         value={text}
