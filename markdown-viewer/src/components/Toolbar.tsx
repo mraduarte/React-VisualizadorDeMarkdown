@@ -5,7 +5,7 @@ type Props = {
 const Toolbar = ({ insertText }: Props) => {
   return (
     <div className="toolbar">
-      <button onClick={() => insertText("#", "")}>h1</button>
+      <button onClick={() => insertText("# ", "")}>h1</button>
       <button onClick={() => insertText("## ", "")}>h2</button>
       <button onClick={() => insertText("**", "**")}>Bold</button>
       <button onClick={() => insertText("*", "*")}>Italico</button>
